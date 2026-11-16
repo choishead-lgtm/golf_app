@@ -46,14 +46,12 @@ streamlit run streamlit_app.py       # http://localhost:8501 , 키 확인: 화�
 ```
 
 ## 현재 상태
-- Streamlit 버전 코드 작성 완료. **아직 한 번도 실행·테스트하지 못함** (이 Mac에 개발자 도구가 없어 python/git이 동작하지 않았음). 개발자 도구 설치 후 pytest부터 돌릴 것.
+- Streamlit 버전 완료: 테스트 12개 통과, 로컬 실행 확인(키 없이 화면만). 로컬 Python은 uv로 만든 3.11 `.venv` (시스템 python3는 3.9).
 - **실제 API 키로는 아직 한 번도 실행하지 않음.** 사용자가 키 3종을 아직 발급받지 않았을 수 있음.
-- GitHub 저장소: https://github.com/choishead-lgtm/golf_app (2026-11-16 기준: 사용자가 웹 업로드한 옛 Starlette 버전이 golf_app/ 하위 폴더에 있음 → 이 폴더 내용으로 교체할지 사용자에게 확인 중)
+- GitHub 저장소: https://github.com/choishead-lgtm/golf_app — 2026-11-16 이 폴더 내용으로 교체 완료(main). 토큰은 맥 키체인에 저장되어 있어 `git push`만 하면 됨.
 
 ## 다음 할 일 (순서대로)
-1. **GitHub에 올리기**: 이 폴더를 git 저장소로 만들고 `origin` = `https://github.com/choishead-lgtm/golf_app.git` 로 연결해 push.
-   원격에 이미 파일이 있으면 먼저 확인하고(웹 업로드로 같은 파일이 있을 수 있음), 덮어쓰기 전에 사용자에게 물어볼 것.
-   `.env`, `.streamlit/secrets.toml`은 절대 커밋하지 않기(.gitignore에 있음).
+1. ~~GitHub에 올리기~~ (완료)
 2. **API 키 받기 안내**: README.md 1단계 참고. 받은 키는 `.env`에만 저장.
 3. **실제 키로 로컬 실행해서 응답 모양 검증** – 가짜 API를 기준으로 짠 부분이라 특히 확인할 것:
    - TMAP 타임머신 예측 API(`/tmap/routes/prediction`) 요청 본문·응답 형식, 사용 신청 필요 여부
