@@ -1,6 +1,9 @@
 [theme]
 base = "light"
-primaryColor = "#2e7d32"
+primaryColor = "#1565C0"            # 버튼·선택 표시 (진한 파랑)
+backgroundColor = "#EAF2FC"         # 화면 배경 (연한 파랑)
+secondaryBackgroundColor = "#D6E6F8" # 입력칸·카드 안쪽 배경
+textColor = "#0D1B2A"
 
 [browser]
 gatherUsageStats = false

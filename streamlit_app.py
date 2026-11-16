@@ -9,6 +9,9 @@ from datetime import datetime, timedelta
 import streamlit as st
 
 st.set_page_config(page_title="여행 도우미", page_icon="⛳", layout="centered")
+# 현재 위치를 읽는 보이지 않는 부품이 화면에 흰 줄로 보이지 않게 숨김
+st.html("<style>div:has(> iframe[title='streamlit_js_eval.streamlit_js_eval'])"
+        "{height:0;overflow:hidden;margin:0;padding:0}</style>")
 
 # Streamlit Cloud의 'Secrets'에 넣은 키를 환경 변수로 옮겨서 app.config가 읽게 합니다.
 try:
@@ -147,8 +150,8 @@ def show_weather(w: dict, golf: bool):
             st.markdown("**" + ("도착 후 라운딩 시간대 예보" if golf else "도착 무렵 시간별 예보") + "**")
             cells = []
             for h in d["window"]:
-                style = "border:2px solid #2e7d32;" if h["is_arrival"] else "border:1px solid rgba(128,128,128,.3);"
-                tag = "<div style='font-size:11px;color:#2e7d32;font-weight:600'>도착</div>" if h["is_arrival"] else ""
+                style = "border:2px solid #1565C0;" if h["is_arrival"] else "border:1px solid rgba(128,128,128,.3);"
+                tag = "<div style='font-size:11px;color:#1565C0;font-weight:600'>도착</div>" if h["is_arrival"] else ""
                 cells.append(
                     f"<div style='{style}border-radius:10px;padding:6px 4px;min-width:58px;text-align:center'>"
                     f"<div style='font-size:11px;opacity:.7'>{html.escape(h['day'].strip()) or '&nbsp;'}</div>"
@@ -172,7 +175,7 @@ def show_route(r: dict, now: datetime):
         st.markdown("**🚗 가는 길 (자동차)**  \n:gray[출처: TMAP]")
         st.markdown(f"### {fmt_dur(d['duration_s'])} :gray[· {fmt_km(d['distance_m'])}]")
         st.markdown(f"{fmt_time(dep, now)} 출발 → **{fmt_time(arr, now)} 도착**")
-        badge = ":green-badge[출발 시각 기준 예측]" if d["predicted"] else ":gray-badge[실시간 교통 기준]"
+        badge = ":blue-badge[출발 시각 기준 예측]" if d["predicted"] else ":gray-badge[실시간 교통 기준]"
         toll = f"통행료 약 {int(d['toll_won']):,}원" if d.get("toll_won") else "통행료 없음"
         st.markdown(f"{badge} {toll}")
         if d.get("note"):
@@ -184,7 +187,7 @@ def show_food(f: dict, golf: bool):
     if not f["ok"]:
         return card_error(title, "네이버", f["error"])
     with st.container(border=True):
-        st.markdown(f"**🍽️ {title}** :green-badge[가까운 순]  \n:gray[출처: 네이버]")
+        st.markdown(f"**🍽️ {title}** :blue-badge[가까운 순]  \n:gray[출처: 네이버]")
         if not f["data"]:
             st.caption("근처 맛집 정보를 찾지 못했어요.")
         for it in f["data"]:
